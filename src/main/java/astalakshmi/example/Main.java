@@ -1,17 +1,60 @@
 package astalakshmi.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import java.util.ArrayList;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        ContactDAO dao = new ContactDAO();
+
+        while (true) {
+
+            System.out.println("=== Contact Management ===");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Display All Contacts");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
+
+            int option = sc.nextInt();
+            sc.nextLine(); // clear buffer
+
+            switch (option) {
+
+                case 1:
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+
+                    System.out.print("Enter Mobile: ");
+                    String mobile = sc.nextLine();
+
+                    dao.addContact(name, mobile);
+                    System.out.println("Contact added!\n");
+                    break;
+
+                case 2:
+                    ArrayList<String> allContacts = dao.getAllContacts();
+
+                    if (allContacts.isEmpty()) {
+                        System.out.println("No contacts yet.\n");
+                    } else {
+                        System.out.println("All Contacts:");
+                        for (String c : allContacts) {
+                            System.out.println(c);  // prints name|mobile
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Goodbye!");
+                    return;
+
+                default:
+                    System.out.println("Invalid option.\n");
+            }
         }
     }
 }
