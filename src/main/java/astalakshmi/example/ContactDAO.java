@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ContactDAO {
 
     // Store contacts as one string: name|mobile
-     ArrayList<String> contacts = new ArrayList<>();
+    ArrayList<String> contacts = new ArrayList<>();
 
     // Add contact
     public void addContact(String name, String mobile) {
@@ -17,4 +17,23 @@ public class ContactDAO {
     public ArrayList<String> getAllContacts() {
         return contacts;
     }
-}
+
+    public String searchByMobile(String searchMobile) {
+        for (String c : contacts) {
+            String[] parts = c.split("\\|");
+            String contactMobile = parts[1];
+
+            String mobile = "";
+            if (contactMobile.equals(mobile)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> searchByName(String searchName) {
+        return null;
+    }
+    }
+
+
